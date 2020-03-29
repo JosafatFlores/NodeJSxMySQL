@@ -1,15 +1,21 @@
 const userService = require("../services/userService");
 const serviceInstance = new userService();
+const bodyParser = require("body-parser");
 
 const getAllUsers = async (req, res, next) => {
     try {
-      const users = await serviceInstance.getUsers();
+      const  data  = req.body;
+      
+      const users = await serviceInstance.getUsers(data);
       console.log("aqui",users)
+      
       res.status(200).json({
+        code: 1,
         data: users,
         message: "users"
       });
     } catch (error) {
+      console.log(error.message)
       next(error);
     }
   }

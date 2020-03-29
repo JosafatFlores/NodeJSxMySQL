@@ -2,9 +2,8 @@ const query = require("../util/database/database");
 const DBInstance = new query();
 
 class userService {
-   async getUsers() {
-    console.log("llegue");
-    const usuarios = await DBInstance.query("select * from usuarios")
+   async getUsers(data) {
+    const usuarios = await DBInstance.query("SELECT NOMBRE, APELLIDOS, TELEFONO, EMAIL FROM USUARIOS WHERE USUARIOID = '" + data.id + "' AND contrasenia = '" + data.pass + "' AND ESTATUS = 'AC'" )
      console.log("usuario", usuarios)
     return usuarios || [];
   }
